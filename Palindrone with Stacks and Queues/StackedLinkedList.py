@@ -28,29 +28,9 @@ class Stack:
     def peek(self):
         peek_node = self.list.head.data
         return peek_node #returns head of the list
+    def is_empty(self):
+        if self.list.head == None:
+            return True
+        else:
+            return False
 
-
-# num_stack = Stack()
-# num_stack.push(45)
-# num_stack.push(56)
-# num_stack.push(11)
-
-# # Output stack
-# print('Stack after push:', end=' ')
-# node = num_stack.list.head
-# while node != None:
-#    print(node.data, end=' ')
-#    node = node.next
-# print()
-
-# # Pop 11
-# popped_item = num_stack.pop()
-# print('Popped:', popped_item)
-
-# # Output final stack
-# print('Stack after pop:', end=' ')
-# node = num_stack.list.head
-# while node != None:
-#    print(node.data, end=' ')
-#    node = node.next
-# print('\n')

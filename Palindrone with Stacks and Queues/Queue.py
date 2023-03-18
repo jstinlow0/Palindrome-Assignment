@@ -21,3 +21,9 @@ class Queue:
         
         # Return the dequeued item
         return dequeued_item
+
+    def is_empty(self):
+        if self.list.head == None:
+            return True
+        else:
+            return False

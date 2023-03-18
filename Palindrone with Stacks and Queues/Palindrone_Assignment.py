@@ -1,34 +1,52 @@
-import StackedLinkedList as sl
+import Stack as s
 import Queue as q
 
-nonAlpha = ["!", "?", ".", ",", ":", ";", ")", "(", "&", "*", "+", "-", "|", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " "]
-def stackToReverseString(phrase):
-    #create empty stack and queue
-    stack = sl.Stack()
+nonAlpha = ["!", "?", ".", ",", ":", ";", ")", "(", "&", 
+            "*", "+", "-", "|", " ", "1", "2","3","4","5",
+            "6","7", "8", "9", "0", "@", "#","$","%", "^", "_"
+            "=", "[", "]", "<",">"]
 
-    #iterate through palindrome
-    for letter in phrase:
-        #add letter to stack
-        stack.push(letter)
+'''take a stack and turn into a string''' 
+
+def stackToReverseString(instack:s.Stack):
+    #create empty string
+    string = ""
+    while not instack.is_empty():
+        temp= instack.pop()
+        string = string + temp
+    return string
 
 
-def reverseStringAndNonAlpha(phrase):
-    #create empty queue and stack
-    stack = sl.Stack()
-
-    #iterate through palindrome
+'''removes non alpha characters from string and pushes the new string onto the stack and queue'''
+def reverseStringAndRemoveNonAlpha(phrase):
+    #create empty stack
+    stack = s.Stack()
+    queue = q.Queue()
+    #pushes character to stack
     for char in phrase:
-        if char in nonAlpha:
+        if char not in nonAlpha:
             stack.push(char)
-        else:
-            #add letter to queue
             queue.enqueue(char)
-    #push each letter to queue and check if it is a palindrome
+    
+    #revmove non alpha characters from phrase
+    #rev_stack, queue = stackToReverseString(stack)
+    return stack,queue
+    
 
-    #push each letter to stack and check if it is a palindrome
+'''checks to see if a string is a palindrome'''
+def isPalindrome(phrase: str):
+    #queue = q.Queue()
+    phrase = phrase.lower()
 
-    #compare stack and queue and return true or false if palindrome
+    #removes unwanted characters and pushes the string onto a stack
+    stack, queue = reverseStringAndRemoveNonAlpha(phrase)
 
-
-def isPalindrome(stack, queue):
-    #compare stack and queue and return true or false if palindrome
+    #checks if stack is empty
+    if stack.is_empty():
+        return False
+    
+    while not stack.is_empty():
+        if stack.pop()!= queue.dequeue():
+            return False
+        
+    return True
